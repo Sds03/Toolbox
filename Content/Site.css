@@ -1,0 +1,54 @@
+﻿/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+    height:836px;
+}
+
+/* Set widths on the form inputs since otherwise they're 100% wide */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+    .jumbotron {
+        margin-top: 20px;
+    }
+    .body-content {
+        padding: 0;
+    }
+}
+.modalPopup {
+
+    background-color: #eee;
+    filter: alpha(opacity=90);
+    opacity: 70;
+}
+.PersoDataPopup
+{
+    min-width:200px;
+    min-height:150px;
+    background:white;
+    margin: auto;
+    padding: 12px;
+    border: 10px solid #d0d0d0;
+}
+
+/* User Message  attribute for <p> */
+.userMSG {
+   background: pink;
+   }    
+
+.alignright {
+  text-align:right; 
+}

@@ -1,0 +1,23 @@
+<script language="javascript" type="text/javascript">
+    var msg = $('#<%= hfMsg.ClientID %>').attr("value");
+    var ctrl = $('#<%= hfCtrl.ClientID %>').attr("value");
+
+    if (msg != undefined && msg != "") {
+        $("#" + ctrl).html(msg);            
+        $("#" + ctrl).show();
+    }
+    else {
+        $("#" + ctrl).hide();
+    }
+</script>
+
+public void ShowMessage(string control, string message)
+{
+    this.hfCtrl.Value = control;
+    this.hfMsg.Value = message;
+}
+
+public void ClearMessage()
+{
+    this.hfMsg.Value = string.Empty;
+}
