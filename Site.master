@@ -15,7 +15,7 @@
     </div>
     <webopt:BundleReference runat="server" Path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-      
+
 </head>
 
 <body>
@@ -35,9 +35,9 @@
                 <asp:ScriptReference Path="~/Scripts/WebForms/Focus.js" />
                 <asp:ScriptReference Name="WebFormsBundle" />
                 <%--Site Scripts--%>
-             </Scripts>
- 
- 
+            </Scripts>
+
+
         </ajaxToolkit:ToolkitScriptManager>
 
         <asp:Image ID="Image1" runat="server" Height="235px" ImageUrl="~/Content/grandpa-grandson.jpg" />
@@ -78,10 +78,14 @@
             </div>
         </div>
         <div class="container body-content">
-            <asp:ContentPlaceHolder ID="MainContent" runat="server">
 
-                               <asp:Panel ID="Panel1" runat="server" BorderColor="Silver" BorderStyle="Inset" BorderWidth="2px" Height="724px">
-                </asp:Panel>
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                <asp:UpdatePanel runat="server">
+                    <ContentTemplate>
+                        <asp:Panel ID="Panel1" runat="server" BorderColor="Silver" BorderStyle="Inset" BorderWidth="2px" Height="724px">
+                        </asp:Panel>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
             </asp:ContentPlaceHolder>
             <hr />
 

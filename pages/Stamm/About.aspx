@@ -399,14 +399,19 @@
                     <br />
                     <asp:TextBox ID="TB_genommen" runat="server" Width="35" ReadOnly="true"></asp:TextBox>
                 </div>
-
+                <asp:GridView ID="history" runat="server" DataSourceID="SqlDataSource5" Visible="false"></asp:GridView>
+                <asp:Button ID="showyears" runat="server" Text="Historie" onClick="showyears_Click"/>
                 <asp:Button ID="ButtonCreateSave" runat="server" Text="Save" OnClick="ButtonCreateSave_Click" />
                 <asp:LinkButton ID="ButtonCreateCancel" runat="server" Text="Cancel" OnClick="ButtonCreateCancel_Click" />
 
             </ContentTemplate>
-        </asp:UpdatePanel>
+          </asp:UpdatePanel>
     </asp:Panel>
-    <p>
+    <p> <asp:SqlDataSource runat="server" ID="SQLDataSource5"  ConnectionString="<%$ ConnectionStrings:toolboxConnectionString %>" SelectCommand="SELECT [udaysinyear], [utaken], [uleftover], [year] FROM [Stats] WHERE ([pid] = @pid) ORDER BY [year]">
+        <SelectParameters>
+            <asp:SessionParameter Name="pid" SessionField="pid" Type="Int32" />
+        </SelectParameters>
+        </asp:SqlDataSource>
         &nbsp;
     </p>
     <p>&nbsp;</p>
