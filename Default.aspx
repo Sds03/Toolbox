@@ -16,10 +16,13 @@
             </p>
         </div>
         <div class="col-md-4">
-            <h2>Mitarbeiterkalendar.
+            <h2>Mitarbeiterkalendar und mehr.
             </h2>
             <p>
                 <a class="btn btn-default" href="contact.aspx">los geht&#39;s &raquo;</a>
+            </p>
+            <p>    
+                <a class="btn btn-default" href="pages/library/library.aspx">Hier für die Leseratten</a>
             </p>
         </div>
         <div class="col-md-4">
