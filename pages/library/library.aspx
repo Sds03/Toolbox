@@ -17,7 +17,7 @@
                         <td style="width: 463px">&nbsp;</td>
                         <td style="width: 67px">&nbsp;</td>
                         <td>
-                            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:toolboxConnectionString %>" DeleteCommand="DELETE FROM [Books] WHERE [Id] = @original_Id " InsertCommand="INSERT INTO [Books] ([titel], [author], [booknr], [location], [description], [numberOfCopies], [nrOfPages], [yearpublished], [pictureURL], [publisher], [checkedOut], [lent]) VALUES (@titel, @author, @booknr, @location, @description, @numberOfCopies, @nrOfPages, @yearpublished, @pictureURL, @publisher, @checkedOut, @lent)" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT Books.Id, Books.titel, Books.author, Books.booknr, Books.location, Books.description, Books.numberOfCopies, Books.nrOfPages, Books.yearpublished, Books.pictureURL, Books.publisher, Books.checkedOut, Books.lent, Abteilungen.Abteilung, Abteilungen.Abteilungsnummer FROM Books INNER JOIN Abteilungen ON Books.location = Abteilungen.Abteilungsnummer WHERE (Books.Id = @Id)" UpdateCommand="UPDATE [Books] SET [titel] = @titel, [author] = @author, [booknr] = @booknr, [location] = @location, [description] = @description, [numberOfCopies] = @numberOfCopies, [nrOfPages] = @nrOfPages, [yearpublished] = @yearpublished, [pictureURL] = @pictureURL, [publisher] = @publisher, [checkedOut] = @checkedOut, [lent] = @lent WHERE [Id] = @original_Id AND (([titel] = @original_titel) OR ([titel] IS NULL AND @original_titel IS NULL)) AND (([author] = @original_author) OR ([author] IS NULL AND @original_author IS NULL)) AND (([booknr] = @original_booknr) OR ([booknr] IS NULL AND @original_booknr IS NULL)) AND (([location] = @original_location) OR ([location] IS NULL AND @original_location IS NULL)) AND (([description] = @original_description) OR ([description] IS NULL AND @original_description IS NULL)) AND (([numberOfCopies] = @original_numberOfCopies) OR ([numberOfCopies] IS NULL AND @original_numberOfCopies IS NULL)) AND (([nrOfPages] = @original_nrOfPages) OR ([nrOfPages] IS NULL AND @original_nrOfPages IS NULL)) AND (([yearpublished] = @original_yearpublished) OR ([yearpublished] IS NULL AND @original_yearpublished IS NULL)) AND (([pictureURL] = @original_pictureURL) OR ([pictureURL] IS NULL AND @original_pictureURL IS NULL)) AND (([publisher] = @original_publisher) OR ([publisher] IS NULL AND @original_publisher IS NULL)) AND (([checkedOut] = @original_checkedOut) OR ([checkedOut] IS NULL AND @original_checkedOut IS NULL)) AND (([lent] = @original_lent) OR ([lent] IS NULL AND @original_lent IS NULL))" ConflictDetection="CompareAllValues">
+                            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:toolboxConnectionString %>" DeleteCommand="DELETE FROM [Books] WHERE [Id] = @original_Id " InsertCommand="INSERT INTO [Books] ([titel], [author], [booknr], [location], [description], [numberOfCopies], [nrOfPages], [yearpublished], [pictureURL], [publisher], [checkedOut], [lent]) VALUES (@titel, @author, @booknr, @location, @description, @numberOfCopies, @nrOfPages, @yearpublished, @pictureURL, @publisher, @checkedOut, @lent)" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT Books.Id, Books.titel, Books.author, Books.booknr, Books.location, Books.description, Books.numberOfCopies, Books.nrOfPages, Books.yearpublished, Books.pictureURL, Books.publisher, Books.checkedOut, Books.lent, Abteilungen.Abteilung, Abteilungen.Abteilungsnummer FROM Books INNER JOIN Abteilungen ON Books.location = Abteilungen.Abteilungsnummer WHERE (Books.Id = @Id)" UpdateCommand="UPDATE [Books] SET [titel] = @titel, [author] = @author, [booknr] = @booknr, [location] = @location, [description] = @description, [numberOfCopies] = @numberOfCopies, [nrOfPages] = @nrOfPages, [yearpublished] = @yearpublished, [pictureURL] = @pictureURL, [publisher] = @publisher, [checkedOut] = @checkedOut, [lent] = @lent WHERE [Id] = @original_Id" ConflictDetection="CompareAllValues">
                                 <DeleteParameters>
                                     <asp:Parameter Name="original_Id" Type="Int32" />
                                 </DeleteParameters>
@@ -52,18 +52,6 @@
                                     <asp:Parameter Name="checkedOut" Type="Int32" />
                                     <asp:Parameter Name="lent" Type="Boolean" />
                                     <asp:Parameter Name="original_Id" Type="Int32" />
-                                    <asp:Parameter Name="original_titel" Type="String" />
-                                    <asp:Parameter Name="original_author" Type="String" />
-                                    <asp:Parameter Name="original_booknr" Type="String" />
-                                    <asp:Parameter Name="original_location" Type="Int32" />
-                                    <asp:Parameter Name="original_description" Type="String" />
-                                    <asp:Parameter Name="original_numberOfCopies" Type="Int32" />
-                                    <asp:Parameter Name="original_nrOfPages" Type="Int32" />
-                                    <asp:Parameter Name="original_yearpublished" Type="String" />
-                                    <asp:Parameter Name="original_pictureURL" Type="String" />
-                                    <asp:Parameter Name="original_publisher" Type="String" />
-                                    <asp:Parameter Name="original_checkedOut" Type="Int32" />
-                                    <asp:Parameter Name="original_lent" Type="Boolean" />
                                 </UpdateParameters>
                             </asp:SqlDataSource>
                             <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:toolboxConnectionString %>" SelectCommand="SELECT * FROM [Personal]"></asp:SqlDataSource>
@@ -148,7 +136,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <asp:TextBox ID="tbpicURL" runat="server" Visible="False"></asp:TextBox>
+                                                    <asp:TextBox ID="tbpicURL" runat="server" Visible="False" Text='<%# Bind("pictureURL") %>'></asp:TextBox>
                                                 </td>
                                                 <td style="width: 148px">&nbsp;</td>
                                                 <td>&nbsp;</td>
@@ -202,7 +190,7 @@
                                                     </asp:DropDownList>
                                                 </td>
                                                 <td style="height: 34px; width: 148px"><b>
-                                                    <asp:CheckBox ID="CBLent" runat="server" Checked='<%# Bind("lent") %>' Text="Lent" />
+                                                    <asp:CheckBox ID="CBLent" runat="server" Checked='<%# Bind("lent") %>' Text="ausgeliehen" />
                                                     </b></td>
                                                 <td style="height: 34px"></td>
                                             </tr>

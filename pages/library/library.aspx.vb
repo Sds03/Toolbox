@@ -62,7 +62,7 @@ Partial Class pages_library_library
     End Sub
 
     Protected Sub FormView1_ItemDeleted(sender As Object, e As FormViewDeletedEventArgs) Handles FormView1.ItemDeleted
-        FormView1.DataBind()
+        GridView1.DataBind()
     End Sub
 
     Protected Sub FormView1_ItemInserted(sender As Object, e As FormViewInsertedEventArgs) Handles FormView1.ItemInserted
