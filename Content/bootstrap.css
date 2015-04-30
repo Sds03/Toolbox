@@ -1410,6 +1410,7 @@ table {
   max-width: 100%;
   background-color: transparent;
     margin-top: 0px;
+    margin-left: 0px;
 }
 
 th {
@@ -3948,7 +3949,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .nav-justified {
-  width: 112%;
+  width: 521%;
 }
 
 .nav-justified > li {
