@@ -32,17 +32,26 @@ Partial Public Class _Default
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As EventArgs)
-        ' prevent invalid ViewState errors in Firefox
+        Dim msg As New Class1
 
+        'show page only if authenticated
+        If User.Identity.IsAuthenticated Then
+        Else
+            msg.ShowMessage("Um den Persönlichen Kalendar zu verwenden, müssen Sie sich zuerst anmelden!", Me.Page)
+            Response.Redirect("~/default.aspx")
+        End If
+
+        ' prevent invalid ViewState errors in Firefox
         If Request.Browser.Browser = "Firefox" Then
             Response.Cache.SetNoStore()
         End If
 
         DayPilotScheduler1.Separators.Clear()
         DayPilotScheduler1.Separators.Add(Date.Today, Color.Red)
-        lbl_ErrorMsg.Text = ""
-        lbl_ErrorMsg.Visible = True
-        Btn_ErrMsg.Visible = False
+        'lbl_ErrorMsg.Text = ""
+        'lbl_ErrorMsg.Visible = True
+        'Btn_ErrMsg.Visible = False
+
         If Not IsPostBack Then
 
             DayPilotScheduler1.StartDate = New Date(Date.Today.Year, 1, 1)
@@ -51,7 +60,6 @@ Partial Public Class _Default
             ' scroll to this month
             Dim firstOfMonth As New Date(Date.Today.Year, Date.Today.Month, 1)
             DayPilotScheduler1.SetScrollX(firstOfMonth)
-
         End If
     End Sub
 
@@ -76,9 +84,8 @@ Partial Public Class _Default
 
         'get Userrights whether admin or group
         If currentUserName Is Nothing Or currentUserName = "" Then
-            Dim msg As New Class1
-            msg.ShowMessage("Um den Persönlichen Kalendar zu verwenden, müssen Sie sich zuerst anmelden!", Me.Page)
-        Else
+
+             Else
             da.SelectCommand.Parameters.AddWithValue("uname", currentUserName)
             da.Fill(dt)
             For Each r As DataRow In dt.Rows

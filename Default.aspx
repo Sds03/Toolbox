@@ -8,17 +8,19 @@
         <div class="col-md-4">
             <h2>Daten und Tools </h2>
             <p>
-                <asp:Hyperlink ID="ImageButton2" runat="server" NavigateUrl="http://localhost/inventar/problem/problemNeu.aspx" ImageUrl="~/images/tools.png" />
+                <asp:Hyperlink ID="ImageButton2" runat="server" NavigateUrl="~/pages/stamm/about.aspx" ImageUrl="~/images/tools.png" />
            
             </p>
+            <p><asp:HyperLink runat="server" NavigateUrl="~/"></asp:HyperLink></p>
         </div>
         <div class="col-md-4">
             <h2>Mitarbeiterkalendar 
             </h2>
             <p>
-                <asp:Hyperlink ID="ImageButton3" runat="server" NavigateUrl="pages/calendar/contact.aspx" ImageUrl="~/images/calendar.png" />
+                <asp:Hyperlink ID="ImageButton3" runat="server" NavigateUrl="pages/calendar/contact.aspx"  ImageUrl="~/images/calendar.png" />
 
                 &nbsp;</p>
+            <a href="pages/Stamm/">pages/Stamm/</a>
         </div>
         <div class="col-md-4">
             <h2>Medizinische Bibliothek

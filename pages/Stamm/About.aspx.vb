@@ -20,6 +20,15 @@ Partial Class About
     Inherits Page
     Protected btn_showModal As Button
 
+    Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
+        If User.Identity.IsAuthenticated And (User.IsInRole("Admin") Or User.IsInRole("Gruppe")) Then
+
+        Else
+            Response.Redirect("~/default.aspx")
+        End If
+        GridView1.SelectedIndex = 1
+    End Sub
+
     Protected Sub FormView1_ItemDeleted(sender As Object, e As FormViewDeletedEventArgs) Handles FormView1.ItemDeleted
         GridView1.DataBind()
     End Sub
@@ -31,6 +40,7 @@ Partial Class About
         Dim IdUserResult As IdentityResult
 
         Dim uRole As RadioButtonList = FormView1.FindControl("rb_role")
+        'Standard=1
         If uRole Is Nothing Then uRole.Text = 1
 
         ' Create a RoleStore object by using the ApplicationDbContext object. 
@@ -66,6 +76,7 @@ Partial Class About
 
     End Sub
 
+    'new user
     Protected Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         FormView1.ChangeMode(FormViewMode.Insert)
     End Sub
@@ -149,19 +160,6 @@ Partial Class About
 
     End Sub
 
-    Protected Sub Page_Init(sender As Object, e As EventArgs) Handles Me.Init
-
-    End Sub
-
-    Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
-        If User.Identity.IsAuthenticated And (User.IsInRole("Admin") Or User.IsInRole("Gruppe")) Then
-
-        Else
-            Response.Redirect("~/default.aspx")
-        End If
-        GridView1.SelectedIndex = 1
-    End Sub
-
     Protected Sub showDaysBtn_Click(sender As Object, e As EventArgs)
 
         ' MPU1.Show()
@@ -210,6 +208,39 @@ Partial Class About
 
     Protected Sub showyears_Click(sender As Object, e As EventArgs)
         If Me.Visible Then
+
+        End If
+    End Sub
+
+    'Password Reset 
+    Protected Sub Button3_Click(sender As Object, e As EventArgs)
+        Dim ApplicationDbContext As ApplicationDbContext = New ApplicationDbContext()
+        Dim umgr As New UserManager
+
+        Dim newPassword As String = "HPpassword"
+        Dim tb As TextBox = FormView1.FindControl("tb_uname")
+        Dim cUser As ApplicationUser = umgr.FindByName(tb.Text)
+        Dim hashedNewPassword As String = umgr.PasswordHasher.HashPassword(newPassword)
+        Dim store As UserStore(Of ApplicationUser) = New UserStore(Of ApplicationUser)
+        store.SetPasswordHashAsync(cUser, hashedNewPassword)
+
+
+    End Sub
+
+    Protected Sub FormView1_ItemUpdating(sender As Object, e As FormViewUpdateEventArgs) Handles FormView1.ItemUpdating
+        Dim context As ApplicationDbContext = New ApplicationDbContext()
+        Dim uRole As RadioButtonList = FormView1.FindControl("rb_role")
+        Dim tb As TextBox = FormView1.FindControl("tb_uname")
+        Dim umgr = New UserManager(Of ApplicationUser)(New UserStore(Of ApplicationUser)(context))
+        Dim cUser As ApplicationUser = umgr.FindByName(tb.Text)
+        Dim store As UserStore(Of ApplicationUser) = New UserStore(Of ApplicationUser)
+
+        If umgr.IsInRole(cUser.Id, uRole.Text) Then
+        Else
+            Select Case uRole.Text
+                Case "2" : store.AddToRoleAsync(cUser, "Admin")
+                Case "3" : store.AddToRoleAsync(cUser, "Gruppe")
+            End Select
 
         End If
     End Sub

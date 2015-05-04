@@ -4,9 +4,7 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-    <link href='css/main.css' type="text/css" rel="stylesheet" />
-    <script src="../../Scripts/daypilot-modal-2.1.js"></script>
-    <script type="text/javascript">
+    .<link href='css/main.css' type="text/css" rel="stylesheet" /><script src="../../Scripts/daypilot-modal-2.1.js"></script><script type="text/javascript">
 
 
         function modalDays(id) {
@@ -25,9 +23,7 @@
 
             }
         }
-    </script>
-
-    <script type="text/javascript">
+    </script><script type="text/javascript">
 
         function getPersonalInfo() {
             var modal = new DayPilotScheduler.Modal();
@@ -45,9 +41,7 @@
                 //DayPilotScheduler.clearSelection();
             };
         }
-    </script>
-
-    <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConflictDetection="CompareAllValues" ConnectionString="<%$ ConnectionStrings:toolboxConnectionString %>" DeleteCommand="DELETE FROM [Stats] WHERE [id] = @original_id AND [pid] = @original_pid AND (([udaysinyear] = @original_udaysinyear) OR ([udaysinyear] IS NULL AND @original_udaysinyear IS NULL)) AND (([utaken] = @original_utaken) OR ([utaken] IS NULL AND @original_utaken IS NULL)) AND (([uleftover] = @original_uleftover) OR ([uleftover] IS NULL AND @original_uleftover IS NULL)) AND (([year] = @original_year) OR ([year] IS NULL AND @original_year IS NULL))" InsertCommand="INSERT INTO [Stats] ( [pid], [udaysinyear], [utaken], [uleftover], [year]) VALUES ( @pid, @udaysinyear, @utaken, @uleftover, @year)" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT * FROM [Stats]" UpdateCommand="UPDATE [Stats] SET [pid] = @pid, [udaysinyear] = @udaysinyear, [utaken] = @utaken, [uleftover] = @uleftover, [year] = @year WHERE [id] = @original_id AND [pid] = @original_pid AND (([udaysinyear] = @original_udaysinyear) OR ([udaysinyear] IS NULL AND @original_udaysinyear IS NULL)) AND (([utaken] = @original_utaken) OR ([utaken] IS NULL AND @original_utaken IS NULL)) AND (([uleftover] = @original_uleftover) OR ([uleftover] IS NULL AND @original_uleftover IS NULL)) AND (([year] = @original_year) OR ([year] IS NULL AND @original_year IS NULL))">
+    </script><asp:SqlDataSource ID="SqlDataSource3" runat="server" ConflictDetection="CompareAllValues" ConnectionString="<%$ ConnectionStrings:toolboxConnectionString %>" DeleteCommand="DELETE FROM [Stats] WHERE [id] = @original_id AND [pid] = @original_pid AND (([udaysinyear] = @original_udaysinyear) OR ([udaysinyear] IS NULL AND @original_udaysinyear IS NULL)) AND (([utaken] = @original_utaken) OR ([utaken] IS NULL AND @original_utaken IS NULL)) AND (([uleftover] = @original_uleftover) OR ([uleftover] IS NULL AND @original_uleftover IS NULL)) AND (([year] = @original_year) OR ([year] IS NULL AND @original_year IS NULL))" InsertCommand="INSERT INTO [Stats] ( [pid], [udaysinyear], [utaken], [uleftover], [year]) VALUES ( @pid, @udaysinyear, @utaken, @uleftover, @year)" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT * FROM [Stats]" UpdateCommand="UPDATE [Stats] SET [pid] = @pid, [udaysinyear] = @udaysinyear, [utaken] = @utaken, [uleftover] = @uleftover, [year] = @year WHERE [id] = @original_id AND [pid] = @original_pid AND (([udaysinyear] = @original_udaysinyear) OR ([udaysinyear] IS NULL AND @original_udaysinyear IS NULL)) AND (([utaken] = @original_utaken) OR ([utaken] IS NULL AND @original_utaken IS NULL)) AND (([uleftover] = @original_uleftover) OR ([uleftover] IS NULL AND @original_uleftover IS NULL)) AND (([year] = @original_year) OR ([year] IS NULL AND @original_year IS NULL))">
         <DeleteParameters>
             <asp:Parameter Name="original_id" Type="Int32" />
             <asp:Parameter Name="original_pid" Type="Int32" />
@@ -142,10 +136,12 @@
                                 <SortedDescendingHeaderStyle BackColor="#4870BE" />
                             </asp:GridView>
                             <td style="width: 471px; vertical-align: top; height: 378px;">&nbsp;<td style="width: 391px; vertical-align: top; height: 378px;">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <asp:FormView ID="FormView1" runat="server" CssClass="PersoDataPopup" DataKeyNames="id" DataSourceID="SqlDataSource2" Font-Size="Medium" Height="177px" Width="271px">
                                     <EditItemTemplate>
                                         id:
                                             <asp:Label ID="idLabel1" runat="server" Text='<%# Eval("id") %>' />
+                                        <asp:TextBox ID="tb_uname" runat="server" Text='<%# Bind("uname") %>' Visible="False"></asp:TextBox>
                                         <table class="nav-justified">
                                             <tr>
                                                 <td>Name</td>
@@ -184,7 +180,7 @@
                                             <tr>
                                                 <td>Role</td>
                                                 <td>
-                                                    <asp:RadioButtonList ID="RadioButtonList2" runat="server" RepeatDirection="Horizontal" SelectedValue='<%# Bind("Role") %>'>
+                                                    <asp:RadioButtonList ID="rb_role" runat="server" RepeatDirection="Horizontal" SelectedValue='<%# Bind("Role") %>'>
                                                         <asp:ListItem Value="1">Standard</asp:ListItem>
                                                         <asp:ListItem Value="2">Admin</asp:ListItem>
                                                         <asp:ListItem Value="3">Gruppe</asp:ListItem>
@@ -261,49 +257,54 @@
                                     <ItemTemplate>
                                         id:
                             <asp:Label ID="idLabel" runat="server" Text='<%# Eval("id") %>' />
+                                        &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<asp:Button ID="Button3" runat="server" Height="19px" OnClick="Button3_Click" Text="PW" />
                                         <table class="nav-justified">
                                           <thead>
                                                 <asp:Label ID="unameTextBox" runat="server"  BackColor="LightGray"  Text='<%# Eval("uname")%>' CssClass="alignright" />
                                             </thead>
-                                            <tr> <td></td></tr>
-                                              <tr>
-                                                <td>Name</td>
-                                                <td>
-                                                    <asp:Label ID="nameLabel" runat="server" Text='<%# Eval("name")%>' />
+                                            <tr> <td style="width: 110px">&nbsp;</td>
+                                                <td style="width: 114px; margin-left: 40px">
+                                                    <asp:TextBox ID="tb_uname" runat="server" Text='<%# Bind("uname") %>' Visible="False"></asp:TextBox>
                                                 </td>
                                             </tr>
+                                              <tr>
+                                                  <td colspan="2">Name</td>
+                                                  <td>
+                                                      <asp:Label ID="nameLabel" runat="server" Text='<%# Eval("name")%>' />
+                                                  </td>
+                                            </tr>
                                             <tr>
-                                                <td>Vorname</td>
+                                                <td colspan="2">Vorname</td>
                                                 <td>
                                                     <asp:Label ID="vnameLabel" runat="server" Text='<%# Eval("vname")%>' />
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>Gebdat</td>
+                                                <td colspan="2">Gebdat</td>
                                                 <td>
                                                     <asp:Label ID="gebdatLabel" runat="server"  Text='<%# Eval("gebdat")%>'   ReadOnly="true"/>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>Abteilung</td>
+                                                <td colspan="2">Abteilung</td>
                                                 <td>
                                                     <asp:Label ID="Label1" runat="server" Text='<%# Eval("Abteilung")%>'></asp:Label>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>Username</td>
+                                                <td colspan="2">Username</td>
                                                 <td>
                                                     <asp:Label ID="unameLabel" runat="server" Text='<%# Eval("uname")%>' />
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>Status</td>
+                                                <td colspan="2">Status</td>
                                                 <td>
                                                     <asp:CheckBox ID="CheckBox1" runat="server" />
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>Rolle</td>
+                                                <td colspan="2">Rolle</td>
                                                 <td>
                                                     <asp:RadioButtonList ID="RadioButtonList1" runat="server" RepeatDirection="Horizontal" SelectedValue='<%# Bind("role") %>'>
                                                         <asp:ListItem Selected="True" Value="1">standard</asp:ListItem>
@@ -317,6 +318,7 @@
                                         <br />
                                         &nbsp;<asp:LinkButton ID="DeleteButton" runat="server" CausesValidation="False" CommandName="Delete" Text="Löschen" />
                                         &nbsp;<asp:LinkButton ID="NewButton" runat="server" CausesValidation="False" CommandName="New" Text="Neu" />
+                                        &nbsp;<asp:LinkButton ID="EditButton" runat="server" CausesValidation="False" CommandName="Edit" Text="Edit" />
 
                                     </ItemTemplate>
                                 </asp:FormView>
