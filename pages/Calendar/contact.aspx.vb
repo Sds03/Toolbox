@@ -189,6 +189,10 @@ Partial Public Class _Default
         End Select
     End Sub
 
+    Protected Sub DayPilotScheduler1_Command1(sender As Object, e As CommandEventArgs) Handles DayPilotScheduler1.Command
+
+    End Sub
+
     Protected Sub DayPilotScheduler1_EventClick(sender As Object, e As EventClickEventArgs) Handles DayPilotScheduler1.EventClick
         TextBoxEditName.Text = e.Text
         TextBoxEditStart.Text = e.Start.ToString("M/d/yyyy HH:mm")
@@ -242,9 +246,5 @@ Partial Public Class _Default
         lbl_ErrorMsg.Visible = False
         Me.Visible = False
         Page.Response.Redirect("http://localhost/toolbox")
-    End Sub
-
-    Protected Sub Page_Init(sender As Object, e As EventArgs) Handles Me.Init
-
     End Sub
 End Class

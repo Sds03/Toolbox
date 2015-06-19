@@ -11,8 +11,12 @@ Partial Class pages_library_library
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
         ' FormView1.ChangeMode(FormViewMode.Insert)
         Session("sqlSearch") = "[a-z]%"
+<<<<<<< HEAD
         Session("FilterLend") = False
         'Page.Form.Attributes.Add("enctype", "multipart/form-data")
+=======
+        Session("lent") = False
+>>>>>>> origin/master
     End Sub
 
     Protected Sub Button1_Click(sender As Object, e As EventArgs)
@@ -23,8 +27,9 @@ Partial Class pages_library_library
     End Sub
 
     Protected Sub UploadButton_Click(sender As Object, e As EventArgs)
-        Dim fuc As FileUpload = FormView1.FindControl("FileUpload1")
+        Dim fuc As FileUpload = FormView1.FindControl("FileUpload2")
         Dim sl As Label = FormView1.FindControl("StatusLabel")
+<<<<<<< HEAD
         Dim tbURL As TextBox = FormView1.FindControl("TextBox1")
         If (fuc.HasFile) Then
             Try
@@ -32,6 +37,15 @@ Partial Class pages_library_library
                 fuc.SaveAs(Server.MapPath("~/images/") + filename)
                 sl.Text = "Upload status: File uploaded!" + Server.MapPath("~/") + filename
                 tbURL.Text = "~/images/" + filename
+=======
+        Dim tbURL As TextBox = FormView1.FindControl("tbpic1")
+        If (fuc.HasFile) Then
+            Try
+                Dim filename As String = fuc.FileName
+                fuc.SaveAs(Server.MapPath("~/") & "images/" & filename)
+                sl.Text = "Upload status: File uploaded!" + Server.MapPath("~/") + filename
+                tbURL.Text = "~/images/" & filename
+>>>>>>> origin/master
             Catch ex As Exception
                 sl.Text = "Upload status: The file could not be uploaded. The following error occured: " + ex.Message
             End Try
@@ -72,18 +86,28 @@ Partial Class pages_library_library
 
     Protected Sub DropDownList3_SelectedIndexChanged(sender As Object, e As EventArgs)
         Dim lent As CheckBox = FormView1.FindControl("CBLent")
+<<<<<<< HEAD
         Dim ddl As DropDownList = FormView1.FindControl("DropDownList3")
         If ddl.Text = "1082" Then
             lent.Checked = False
         Else : lent.Checked = True
         End If
 
+=======
+        Dim person As DropDownList = FormView1.FindControl("DropDownList3")
+        If Not person.SelectedValue = 1098 Then
+            lent.Checked = True
+        Else
+            lent.Checked = False
+        End If
+>>>>>>> origin/master
     End Sub
 
     Protected Sub FormView1_ItemUpdated(sender As Object, e As FormViewUpdatedEventArgs) Handles FormView1.ItemUpdated
         GridView1.DataBind()
     End Sub
 
+<<<<<<< HEAD
     Protected Sub FormView1_ItemUpdating(sender As Object, e As FormViewUpdateEventArgs) Handles FormView1.ItemUpdating
         Dim tst As FormViewUpdateEventArgs = e
         Label3.Text = e.NewValues.Item("picPath")
@@ -91,4 +115,15 @@ Partial Class pages_library_library
 
 
     End Sub
+=======
+ 
+    Protected Sub CBFilter_CheckedChanged(sender As Object, e As EventArgs) Handles CBFilter.CheckedChanged
+        If CBFilter.Checked Then
+            Session("lent") = True
+        Else
+            Session("lent") = False
+        End If
+    End Sub
+
+>>>>>>> origin/master
 End Class

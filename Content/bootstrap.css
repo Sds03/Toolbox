@@ -164,7 +164,7 @@ select,
 textarea {
   font-family: inherit;
   font-size: 100%;
-    margin-left: 0;
+    margin-left: 22px;
     margin-right: 0;
     margin-bottom: 0;
 }
@@ -1412,7 +1412,11 @@ table {
   max-width: 100%;
   background-color: transparent;
     margin-top: 0px;
+<<<<<<< HEAD
     margin-right: 0px;
+=======
+    margin-left: 0px;
+>>>>>>> origin/master
 }
 
 th {
@@ -3956,7 +3960,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .nav-justified {
-  width: 112%;
+  width: 521%;
 }
 
 .nav-justified > li {

@@ -118,7 +118,7 @@
             <div style="margin-left: 208px">
                 <DayPilot:DayPilotScheduler
                     runat="server"
-                    Scale="Day"
+                    Scale="Week"
                     DataEndField="eventend"
                     DataStartField="eventstart"
                     DataTextField="eventname"
