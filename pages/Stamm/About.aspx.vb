@@ -20,6 +20,15 @@ Partial Class About
     Inherits Page
     Protected btn_showModal As Button
 
+    Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
+        If User.Identity.IsAuthenticated And (User.IsInRole("Admin") Or User.IsInRole("Gruppe")) Then
+
+        Else
+            ' Response.Redirect("~/default.aspx")
+        End If
+        GridView1.SelectedIndex = 1
+    End Sub
+
     Protected Sub FormView1_ItemDeleted(sender As Object, e As FormViewDeletedEventArgs) Handles FormView1.ItemDeleted
         GridView1.DataBind()
     End Sub
@@ -141,6 +150,7 @@ Partial Class About
         SqlDataSource3.InsertParameters("pid").DefaultValue = statsID
         SqlDataSource3.InsertParameters("year").DefaultValue = Now.Year
         SqlDataSource3.Insert()
+       
     End Sub
 
     Protected Sub SqlDataSource2_Inserting(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSource2.Inserting
@@ -151,15 +161,6 @@ Partial Class About
 
     Protected Sub Page_Init(sender As Object, e As EventArgs) Handles Me.Init
 
-    End Sub
-
-    Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
-        If User.Identity.IsAuthenticated And (User.IsInRole("Admin") Or User.IsInRole("Gruppe")) Then
-
-        Else
-            Response.Redirect("~/default.aspx")
-        End If
-        GridView1.SelectedIndex = 1
     End Sub
 
     Protected Sub showDaysBtn_Click(sender As Object, e As EventArgs)
@@ -203,7 +204,20 @@ Partial Class About
     Protected Sub TB_Gesamt_TextChanged(sender As Object, e As EventArgs) Handles TB_Gesamt.TextChanged
         Session("gesamt") = TB_Gesamt.Text
     End Sub
+    'Password Reset 
+    Protected Sub Button3_Click(sender As Object, e As EventArgs)
+        Dim ApplicationDbContext As ApplicationDbContext = New ApplicationDbContext()
+        Dim umgr As New UserManager
 
+        Dim newPassword As String = "HPpassword"
+        Dim tb As TextBox = FormView1.FindControl("tb_uname")
+        Dim cUser As ApplicationUser = umgr.FindByName(tb.Text)
+        Dim hashedNewPassword As String = umgr.PasswordHasher.HashPassword(newPassword)
+        Dim store As UserStore(Of ApplicationUser) = New UserStore(Of ApplicationUser)
+        store.SetPasswordHashAsync(cUser, hashedNewPassword)
+
+
+    End Sub
     Protected Sub TB_Resturlaub_TextChanged(sender As Object, e As EventArgs) Handles TB_Resturlaub.TextChanged
         Session("rest") = TB_Resturlaub.Text
     End Sub
@@ -213,4 +227,5 @@ Partial Class About
 
         End If
     End Sub
+
 End Class

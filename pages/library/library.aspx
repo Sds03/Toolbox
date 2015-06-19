@@ -1,11 +1,10 @@
-﻿<%@ Page Title="" Language="VB" MasterPageFile="~/pages/Stamm/Stamm.master" AutoEventWireup="false" CodeFile="library.aspx.vb" Inherits="pages_library_library" %>
+﻿<%@ Page Title="" Language="VB" MasterPageFile="~/site.master" AutoEventWireup="false" CodeFile="library.aspx.vb" Inherits="pages_library_library" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
-    <asp:UpdatePanel runat="server" ID="librayUpdatePanel">
-        <ContentTemplate>
-            <asp:Panel runat="server" CssClass="PersoDataPopup" Height="980px" Width="973px" ScrollBars="Vertical">
+    
+            <asp:Panel runat="server" CssClass="PersoDataPopup" Height="980px" Width="1173px" ScrollBars="Vertical">
                 <asp:Label ID="Label1" runat="server" Font-Size="X-Large" Text="HPK Medizinische Bibliothek"></asp:Label>
                 <br />
                 <asp:TextBox runat="server" ID="tbSearch"></asp:TextBox><asp:Button ID="btnSearch" runat="server" OnClick="btnSearch_Click" Text="Suche" />
@@ -17,9 +16,22 @@
                         <td style="width: 463px">&nbsp;</td>
                         <td style="width: 67px">&nbsp;</td>
                         <td>
-                            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:toolboxConnectionString %>" DeleteCommand="DELETE FROM [Books] WHERE [Id] = @original_Id " InsertCommand="INSERT INTO [Books] ([titel], [author], [booknr], [location], [description], [numberOfCopies], [nrOfPages], [yearpublished], [pictureURL], [publisher], [checkedOut], [lent]) VALUES (@titel, @author, @booknr, @location, @description, @numberOfCopies, @nrOfPages, @yearpublished, @pictureURL, @publisher, @checkedOut, @lent)" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT Books.Id, Books.titel, Books.author, Books.booknr, Books.location, Books.description, Books.numberOfCopies, Books.nrOfPages, Books.yearpublished, Books.pictureURL, Books.publisher, Books.checkedOut, Books.lent, Abteilungen.Abteilung, Abteilungen.Abteilungsnummer FROM Books INNER JOIN Abteilungen ON Books.location = Abteilungen.Abteilungsnummer WHERE (Books.Id = @Id)" UpdateCommand="UPDATE [Books] SET [titel] = @titel, [author] = @author, [booknr] = @booknr, [location] = @location, [description] = @description, [numberOfCopies] = @numberOfCopies, [nrOfPages] = @nrOfPages, [yearpublished] = @yearpublished, [pictureURL] = @pictureURL, [publisher] = @publisher, [checkedOut] = @checkedOut, [lent] = @lent WHERE [Id] = @original_Id" ConflictDetection="CompareAllValues">
+                            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:toolboxConnectionString %>" DeleteCommand="DELETE FROM [Books] WHERE [Id] = @original_Id AND (([titel] = @original_titel) OR ([titel] IS NULL AND @original_titel IS NULL)) AND (([author] = @original_author) OR ([author] IS NULL AND @original_author IS NULL)) AND (([booknr] = @original_booknr) OR ([booknr] IS NULL AND @original_booknr IS NULL)) AND (([location] = @original_location) OR ([location] IS NULL AND @original_location IS NULL)) AND (([description] = @original_description) OR ([description] IS NULL AND @original_description IS NULL)) AND (([numberOfCopies] = @original_numberOfCopies) OR ([numberOfCopies] IS NULL AND @original_numberOfCopies IS NULL)) AND (([nrOfPages] = @original_nrOfPages) OR ([nrOfPages] IS NULL AND @original_nrOfPages IS NULL)) AND (([yearpublished] = @original_yearpublished) OR ([yearpublished] IS NULL AND @original_yearpublished IS NULL)) AND (([picPath] = @original_picPath) OR ([picPath] IS NULL AND @original_picPath IS NULL)) AND (([publisher] = @original_publisher) OR ([publisher] IS NULL AND @original_publisher IS NULL)) AND (([checkedOut] = @original_checkedOut) OR ([checkedOut] IS NULL AND @original_checkedOut IS NULL)) AND (([lent] = @original_lent) OR ([lent] IS NULL AND @original_lent IS NULL)) AND (([pURL] = @original_pURL) OR ([pURL] IS NULL AND @original_pURL IS NULL))" InsertCommand="INSERT INTO [Books] ([titel], [author], [booknr], [location], [description], [numberOfCopies], [nrOfPages], [yearpublished], [picPath], [publisher], [checkedOut], [lent], [pURL]) VALUES (@titel, @author, @booknr, @location, @description, @numberOfCopies, @nrOfPages, @yearpublished, @picPath, @publisher, @checkedOut, @lent, @pURL)" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT Books.Id, Books.titel, Books.author, Books.booknr, Books.location, Books.description, Books.numberOfCopies, Books.nrOfPages, Books.yearpublished, Books.picPath, Books.publisher, Books.checkedOut, Books.lent, Books.pURL, Abteilungen.Abteilungsnummer, Abteilungen.Abteilung FROM Books INNER JOIN Abteilungen ON Books.location = Abteilungen.Abteilungsnummer WHERE (Books.Id = @Id)" UpdateCommand="UPDATE [Books] SET [titel] = @titel, [author] = @author, [booknr] = @booknr, [location] = @location, [description] = @description, [numberOfCopies] = @numberOfCopies, [nrOfPages] = @nrOfPages, [yearpublished] = @yearpublished, [picPath] = @picPath, [publisher] = @publisher, [checkedOut] = @checkedOut, [lent] = @lent, [pURL] = @pURL WHERE [Id] = @original_Id " ConflictDetection="CompareAllValues">
                                 <DeleteParameters>
                                     <asp:Parameter Name="original_Id" Type="Int32" />
+                                    <asp:Parameter Name="original_titel" Type="String" />
+                                    <asp:Parameter Name="original_author" Type="String" />
+                                    <asp:Parameter Name="original_booknr" Type="String" />
+                                    <asp:Parameter Name="original_location" Type="Int32" />
+                                    <asp:Parameter Name="original_description" Type="String" />
+                                    <asp:Parameter Name="original_numberOfCopies" Type="Int32" />
+                                    <asp:Parameter Name="original_nrOfPages" Type="Int32" />
+                                    <asp:Parameter Name="original_yearpublished" Type="String" />
+                                    <asp:Parameter Name="original_picPath" Type="String" />
+                                    <asp:Parameter Name="original_publisher" Type="String" />
+                                    <asp:Parameter Name="original_checkedOut" Type="Int32" />
+                                    <asp:Parameter Name="original_lent" Type="Boolean" />
+                                    <asp:Parameter Name="original_pURL" Type="String" />
                                 </DeleteParameters>
                                 <InsertParameters>
                                     <asp:Parameter Name="titel" Type="String" />
@@ -30,10 +42,11 @@
                                     <asp:Parameter Name="numberOfCopies" Type="Int32" />
                                     <asp:Parameter Name="nrOfPages" Type="Int32" />
                                     <asp:Parameter Name="yearpublished" Type="String" />
-                                    <asp:Parameter Name="pictureURL" Type="String"  DefaultValue="~\images\generic.jpg" />
+                                    <asp:Parameter Name="picPath" Type="String" />
                                     <asp:Parameter Name="publisher" Type="String" />
-                                    <asp:Parameter Name="checkedOut" Type="Int32" DefaultValue="1098"/>
-                                    <asp:Parameter Name="lent" Type="Boolean" DefaultValue="False" />
+                                    <asp:Parameter Name="checkedOut" Type="Int32" />
+                                    <asp:Parameter Name="lent" Type="Boolean" />
+                                    <asp:Parameter Name="pURL" Type="String" />
                                 </InsertParameters>
                                 <SelectParameters>
                                     <asp:ControlParameter ControlID="GridView1" Name="Id" PropertyName="SelectedValue" Type="Int32" />
@@ -47,21 +60,87 @@
                                     <asp:Parameter Name="numberOfCopies" Type="Int32" />
                                     <asp:Parameter Name="nrOfPages" Type="Int32" />
                                     <asp:Parameter Name="yearpublished" Type="String" />
-                                    <asp:Parameter Name="pictureURL" Type="String" />
+                                    <asp:Parameter Name="picPath" Type="String" />
+                                    <asp:Parameter Name="publisher" Type="String" />
+                                    <asp:Parameter Name="checkedOut" Type="Int32" />
+                                    <asp:Parameter Name="lent" Type="Boolean" />
+                                    <asp:Parameter Name="pURL" Type="String" />
+                               
+                                    <asp:Parameter Name="original_Id" Type="Int32" />
+                                    
+                                </UpdateParameters>
+                            </asp:SqlDataSource>
+                            <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:toolboxConnectionString %>" SelectCommand="SELECT * FROM [Personal]"></asp:SqlDataSource>
+                            <asp:SqlDataSource ID="SqlDataSource5" runat="server" ConflictDetection="CompareAllValues" ConnectionString="<%$ ConnectionStrings:toolboxConnectionString %>" DeleteCommand="DELETE FROM [Books] WHERE [Id] = @original_Id AND (([titel] = @original_titel) OR ([titel] IS NULL AND @original_titel IS NULL)) AND (([author] = @original_author) OR ([author] IS NULL AND @original_author IS NULL)) AND (([booknr] = @original_booknr) OR ([booknr] IS NULL AND @original_booknr IS NULL)) AND (([location] = @original_location) OR ([location] IS NULL AND @original_location IS NULL)) AND (([description] = @original_description) OR ([description] IS NULL AND @original_description IS NULL)) AND (([numberOfCopies] = @original_numberOfCopies) OR ([numberOfCopies] IS NULL AND @original_numberOfCopies IS NULL)) AND (([nrOfPages] = @original_nrOfPages) OR ([nrOfPages] IS NULL AND @original_nrOfPages IS NULL)) AND (([yearpublished] = @original_yearpublished) OR ([yearpublished] IS NULL AND @original_yearpublished IS NULL)) AND (([picPath] = @original_picPath) OR ([picPath] IS NULL AND @original_picPath IS NULL)) AND (([publisher] = @original_publisher) OR ([publisher] IS NULL AND @original_publisher IS NULL)) AND (([checkedOut] = @original_checkedOut) OR ([checkedOut] IS NULL AND @original_checkedOut IS NULL)) AND (([lent] = @original_lent) OR ([lent] IS NULL AND @original_lent IS NULL))" InsertCommand="INSERT INTO [Books] ([titel], [author], [booknr], [location], [description], [numberOfCopies], [nrOfPages], [yearpublished], [picPath], [publisher], [checkedOut], [lent]) VALUES (@titel, @author, @booknr, @location, @description, @numberOfCopies, @nrOfPages, @yearpublished, @picPath, @publisher, @checkedOut, @lent)" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT Books.Id, Books.titel, Books.author, Books.booknr, Books.location, Books.description, Books.numberOfCopies, Books.nrOfPages, Books.yearpublished, Books.picPath, Books.publisher, Books.checkedOut, Books.lent, Abteilungen.Abteilung, Abteilungen.Abteilungsnummer FROM Books INNER JOIN Abteilungen ON Books.location = Abteilungen.Abteilungsnummer WHERE (Books.Id = @Id)" UpdateCommand="UPDATE [Books] SET [titel] = @titel, [author] = @author, [booknr] = @booknr, [location] = @location, [description] = @description, [numberOfCopies] = @numberOfCopies, [nrOfPages] = @nrOfPages, [yearpublished] = @yearpublished, [picPath] = @picPath, [publisher] = @publisher, [checkedOut] = @checkedOut, [lent] = @lent WHERE [Id] = @original_Id AND (([titel] = @original_titel) OR ([titel] IS NULL AND @original_titel IS NULL)) AND (([author] = @original_author) OR ([author] IS NULL AND @original_author IS NULL)) AND (([booknr] = @original_booknr) OR ([booknr] IS NULL AND @original_booknr IS NULL)) AND (([location] = @original_location) OR ([location] IS NULL AND @original_location IS NULL)) AND (([description] = @original_description) OR ([description] IS NULL AND @original_description IS NULL)) AND (([numberOfCopies] = @original_numberOfCopies) OR ([numberOfCopies] IS NULL AND @original_numberOfCopies IS NULL)) AND (([nrOfPages] = @original_nrOfPages) OR ([nrOfPages] IS NULL AND @original_nrOfPages IS NULL)) AND (([yearpublished] = @original_yearpublished) OR ([yearpublished] IS NULL AND @original_yearpublished IS NULL)) AND (([picPath] = @original_picPath) OR ([picPath] IS NULL AND @original_picPath IS NULL)) AND (([publisher] = @original_publisher) OR ([publisher] IS NULL AND @original_publisher IS NULL)) AND (([checkedOut] = @original_checkedOut) OR ([checkedOut] IS NULL AND @original_checkedOut IS NULL)) AND (([lent] = @original_lent) OR ([lent] IS NULL AND @original_lent IS NULL))">
+                                <DeleteParameters>
+                                    <asp:Parameter Name="original_Id" Type="Int32" />
+                                    <asp:Parameter Name="original_titel" Type="String" />
+                                    <asp:Parameter Name="original_author" Type="String" />
+                                    <asp:Parameter Name="original_booknr" Type="String" />
+                                    <asp:Parameter Name="original_location" Type="Int32" />
+                                    <asp:Parameter Name="original_description" Type="String" />
+                                    <asp:Parameter Name="original_numberOfCopies" Type="Int32" />
+                                    <asp:Parameter Name="original_nrOfPages" Type="Int32" />
+                                    <asp:Parameter Name="original_yearpublished" Type="String" />
+                                    <asp:Parameter Name="original_picPath" Type="String" />
+                                    <asp:Parameter Name="original_publisher" Type="String" />
+                                    <asp:Parameter Name="original_checkedOut" Type="Int32" />
+                                    <asp:Parameter Name="original_lent" Type="Boolean" />
+                                </DeleteParameters>
+                                <InsertParameters>
+                                    <asp:Parameter Name="titel" Type="String" />
+                                    <asp:Parameter Name="author" Type="String" />
+                                    <asp:Parameter Name="booknr" Type="String" />
+                                    <asp:Parameter Name="location" Type="Int32" />
+                                    <asp:Parameter Name="description" Type="String" />
+                                    <asp:Parameter Name="numberOfCopies" Type="Int32" />
+                                    <asp:Parameter Name="nrOfPages" Type="Int32" />
+                                    <asp:Parameter Name="yearpublished" Type="String" />
+                                    <asp:Parameter Name="picPath" Type="String" />
+                                    <asp:Parameter Name="publisher" Type="String" />
+                                    <asp:Parameter Name="checkedOut" Type="Int32" />
+                                    <asp:Parameter Name="lent" Type="Boolean" />
+                                </InsertParameters>
+                                <SelectParameters>
+                                    <asp:ControlParameter ControlID="GridView1" Name="Id" PropertyName="SelectedValue" Type="Int32" />
+                                </SelectParameters>
+                                <UpdateParameters>
+                                    <asp:Parameter Name="titel" Type="String" />
+                                    <asp:Parameter Name="author" Type="String" />
+                                    <asp:Parameter Name="booknr" Type="String" />
+                                    <asp:Parameter Name="location" Type="Int32" />
+                                    <asp:Parameter Name="description" Type="String" />
+                                    <asp:Parameter Name="numberOfCopies" Type="Int32" />
+                                    <asp:Parameter Name="nrOfPages" Type="Int32" />
+                                    <asp:Parameter Name="yearpublished" Type="String" />
+                                    <asp:Parameter Name="picPath" Type="String" />
                                     <asp:Parameter Name="publisher" Type="String" />
                                     <asp:Parameter Name="checkedOut" Type="Int32" />
                                     <asp:Parameter Name="lent" Type="Boolean" />
                                     <asp:Parameter Name="original_Id" Type="Int32" />
+                                    <asp:Parameter Name="original_titel" Type="String" />
+                                    <asp:Parameter Name="original_author" Type="String" />
+                                    <asp:Parameter Name="original_booknr" Type="String" />
+                                    <asp:Parameter Name="original_location" Type="Int32" />
+                                    <asp:Parameter Name="original_description" Type="String" />
+                                    <asp:Parameter Name="original_numberOfCopies" Type="Int32" />
+                                    <asp:Parameter Name="original_nrOfPages" Type="Int32" />
+                                    <asp:Parameter Name="original_yearpublished" Type="String" />
+                                    <asp:Parameter Name="original_picPath" Type="String" />
+                                    <asp:Parameter Name="original_publisher" Type="String" />
+                                    <asp:Parameter Name="original_checkedOut" Type="Int32" />
+                                    <asp:Parameter Name="original_lent" Type="Boolean" />
                                 </UpdateParameters>
                             </asp:SqlDataSource>
-                            <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:toolboxConnectionString %>" SelectCommand="SELECT * FROM [Personal]"></asp:SqlDataSource>
                             <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:toolboxConnectionString %>" SelectCommand="SELECT [id], [Abteilungsnummer], [Abteilung] FROM [Abteilungen]"></asp:SqlDataSource>
-                            <asp:SqlDataSource ID="SqlDataSource4" runat="server" ConnectionString="<%$ ConnectionStrings:toolboxConnectionString %>" SelectCommand="SELECT Books.Id, Books.titel, Books.location, Books.booknr, Books.author, Books.description, Books.numberOfCopies, Books.nrOfPages, Books.yearpublished, Books.pictureURL, Books.publisher, Books.checkedOut, Books.lent, Abteilungen.Abteilungsnummer, Abteilungen.Abteilung FROM Books INNER JOIN Abteilungen ON Books.location = Abteilungen.Abteilungsnummer WHERE (Books.titel LIKE '%' + @titel + '%') AND (Books.lent = @CBLent)">
+                            <asp:SqlDataSource ID="SqlDataSource4" runat="server" ConnectionString="<%$ ConnectionStrings:toolboxConnectionString %>" SelectCommand="SELECT Books.Id, Books.titel, Books.location, Books.booknr, Books.author, Books.description, Books.numberOfCopies, Books.nrOfPages, Books.yearpublished, Books.picPath, Books.publisher, Books.checkedOut, Books.lent, Abteilungen.Abteilungsnummer, Abteilungen.Abteilung FROM Books INNER JOIN Abteilungen ON Books.location = Abteilungen.Abteilungsnummer WHERE (Books.titel LIKE '%' + @titel + '%') AND (Books.lent = @CBLent)">
                                 <SelectParameters>
                                     <asp:SessionParameter Name="titel" SessionField="sqlSearch" Type="String" />
                                     <asp:ControlParameter ControlID="CBFilter" Name="CBLent" PropertyName="Checked" />
                                 </SelectParameters>
                             </asp:SqlDataSource>
+                            <asp:Label ID="Label3" runat="server" Text="Label"></asp:Label>
+                            <asp:Label ID="Label4" runat="server" Text="Label"></asp:Label>
                         </td>
                     </tr>
                     <tr>
@@ -71,7 +150,7 @@
                                 <asp:CommandField ShowSelectButton="True" />
                                 <asp:BoundField DataField="id" HeaderText="ID" SortExpression="ID" />
                                 <asp:BoundField DataField="Abteilung" HeaderText="Standort" SortExpression="Abteilung" />
-                               <asp:BoundField DataField="titel" HeaderText="Titel" SortExpression="titel" />
+                                <asp:BoundField DataField="titel" HeaderText="Titel" SortExpression="titel" />
                                 <asp:BoundField DataField="booknr" HeaderText="Buchnr" SortExpression="booknr" />
                                 <asp:BoundField DataField="author" HeaderText="Author" SortExpression="author" />
                             </Columns>
@@ -97,13 +176,12 @@
                                         <table border="0" class="nav-justified" style="border-width: 6px; border-color: #C0C0C0; background-color: #E1E3E1;">
                                             <tr>
                                                 <td>
-                                                    <asp:Label ID="Label2" runat="server" Text='<%# Bind("abteilung")%>' ></asp:Label>
+                                                    <asp:Label ID="Label2" runat="server" Text='<%# Bind("abteilung")%>'></asp:Label>
                                                 </td>
-                                                <td style="width: 148px">
-                                                    &nbsp;</td>
+                                                <td style="width: 148px">&nbsp;</td>
                                                 <td>&nbsp;</td>
                                                 <td rowspan="5"><b>Beschreibung</b><asp:TextBox ID="descriptionTextBox" runat="server" Height="68px" Text='<%# Bind("description") %>' TextMode="MultiLine" Width="233px" />
-                                                    <b>PictureURL</b></td>
+                                                    <b>picPath</b></td>
                                             </tr>
                                             <tr>
                                                 <td><b>Titel</b></td>
@@ -127,7 +205,7 @@
                                                 <td>&nbsp;</td>
                                             </tr>
                                             <tr>
-                                               <td style="height: 24px"><b>Standort</b></td>
+                                                <td style="height: 24px"><b>Standort</b></td>
                                                 <td style="height: 24px; width: 148px;">
                                                     <asp:DropDownList ID="DropDownList2" runat="server" DataSourceID="SqlDataSource3" DataTextField="Abteilung" DataValueField="id" SelectedValue='<%# Bind("Location") %>'>
                                                     </asp:DropDownList>
@@ -135,21 +213,22 @@
                                                 <td style="height: 24px"></td>
                                             </tr>
                                             <tr>
-                                                <td>
-                                                    <asp:TextBox ID="tbpicURL" runat="server" Visible="False" Text='<%# Bind("pictureURL") %>'></asp:TextBox>
-                                                </td>
-                                                <td style="width: 148px">&nbsp;</td>
-                                                <td>&nbsp;</td>
-                                                <td><b>
+                                                <td style="height: 25px">
+                                                    &nbsp;</td>
+                                                <td style="width: 148px; height: 25px;">&nbsp;</td>
+                                                <td style="height: 25px"></td>
+                                                <td style="height: 25px"><b>
                                                     <asp:FileUpload ID="FileUpload1" runat="server" Height="21px" />
-                                                    </b></td>
+                                                </b></td>
                                             </tr>
                                             <tr>
-                                                <td colspan="3">&nbsp;</td>
+                                                <td colspan="3">
+                                                    <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("picPath") %>'></asp:TextBox>
+                                                </td>
                                                 <td><b>
                                                     <asp:Button ID="UploadButton" runat="server" OnClick="UploadButton_Click" Text="Upload" />
                                                     <asp:Label ID="StatusLabel" runat="server" Text="Label"></asp:Label>
-                                                    </b></td>
+                                                </b></td>
                                             </tr>
                                             <tr>
                                                 <td><b>Seitenanzahl</b></td>
@@ -158,7 +237,7 @@
                                                 </td>
                                                 <td>&nbsp;</td>
                                                 <td rowspan="5">
-                                                    <asp:Image ID="Image3" runat="server" ImageUrl='<%#  Bind("pictureURL") %>' />
+                                                    <asp:Image ID="Image3" runat="server" ImageUrl='<%# Bind("picPath")%>' />
                                                 </td>
                                             </tr>
                                             <tr>
@@ -181,7 +260,7 @@
                                                 <td style="height: 34px"><b>Kopien</b></td>
                                                 <td style="height: 34px; width: 148px"><b>
                                                     <asp:TextBox ID="numberOfCopiesTextBox" runat="server" Text='<%# Bind("numberOfCopies") %>' Width="25px" />
-                                                    </b></td>
+                                                </b></td>
                                                 <td style="height: 34px">&nbsp;</td>
                                             </tr>
                                             <tr>
@@ -190,19 +269,18 @@
                                                     </asp:DropDownList>
                                                 </td>
                                                 <td style="height: 34px; width: 148px"><b>
-                                                    <asp:CheckBox ID="CBLent" runat="server" Checked='<%# Bind("lent") %>' Text="ausgeliehen" />
-                                                    </b></td>
+                                                    <asp:CheckBox ID="CBLent" runat="server" Checked='<%# Bind("lent") %>' Text="ausgeliehen" Visible="False" />
+                                                </b></td>
                                                 <td style="height: 34px"></td>
                                             </tr>
                                         </table>
                                     </td>
-                                    <td>
-                                        &nbsp;</td>
+                                    <td>&nbsp;</td>
                                     <td>&nbsp;</td>
                                 </tr>
                             </table>
                             <br />
-                            <asp:LinkButton ID="UpdateButton" runat="server" CausesValidation="True" CommandName="Update" Text="Aktualisieren" />
+                            <asp:LinkButton ID="UpdateButton" runat="server" CausesValidation="False" CommandName="Update" Text="Aktualisieren" />
                             &nbsp;<asp:LinkButton ID="UpdateCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="Abbrechen" />
                         </EditItemTemplate>
                         <InsertItemTemplate>
@@ -241,8 +319,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <asp:TextBox ID="tbpicURL" runat="server" Visible="False"></asp:TextBox>
-                                    </td>
+                                        &nbsp;</td>
                                     <td>&nbsp;</td>
                                     <td>&nbsp;</td>
                                     <td>
@@ -291,7 +368,7 @@
                                     <td><b>Kopien</b></td>
                                     <td>
                                         <b>
-                                        <asp:TextBox ID="numberOfCopiesTextBox" runat="server" Text='<%# Bind("numberOfCopies") %>' Width="25px" />
+                                            <asp:TextBox ID="numberOfCopiesTextBox" runat="server" Text='<%# Bind("numberOfCopies") %>' Width="25px" />
                                         </b>
                                     </td>
                                     <td><b></b></td>
@@ -299,12 +376,12 @@
                                 </tr>
                                 <tr>
                                     <td>&nbsp;</td>
-                                    <td>
-                                        &nbsp;</td>
+                                    <td>&nbsp;</td>
                                     <td><b></b></td>
                                     <td>&nbsp;</td>
                                 </tr>
                             </table>
+                            <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("picPath") %>'></asp:TextBox>
                             <br />
                             <asp:LinkButton ID="InsertButton" runat="server" CausesValidation="True" CommandName="Insert" Text="Einfügen" />
                             &nbsp;<asp:LinkButton ID="InsertCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="Abbrechen" />
@@ -317,7 +394,7 @@
                                         <asp:TextBox ID="titelTextBox" runat="server" Text='<%# Bind("titel") %>' />
                                     </td>
                                     <td rowspan="11">
-                                        <asp:Image ID="Image2" runat="server" ImageUrl='<%#  Bind("pictureURL") %>' Height="200px" />
+                                        <asp:Image ID="Image2" runat="server" ImageUrl='<%#  Bind("picPath") %>' Height="200px" />
                                     </td>
                                 </tr>
                                 <tr>
@@ -365,7 +442,7 @@
                                 <tr>
                                     <td>BildURL</td>
                                     <td>
-                                        <asp:TextBox ID="pictureURLTextBox" runat="server" Text='<%# Bind("pictureURL") %>' />
+                                        <asp:TextBox ID="picPathTextBox" runat="server" Text='<%# Bind("picPath") %>' />
                                     </td>
                                 </tr>
                                 <tr>
@@ -392,8 +469,7 @@
                     </tr>
                 </table>
             </asp:Panel>
-        </ContentTemplate>
-    </asp:UpdatePanel>
+     
 </asp:Content>
 
 

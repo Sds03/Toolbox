@@ -500,8 +500,8 @@ h6 small,
 h1,
 h2,
 h3 {
-  margin-top: 20px;
-  margin-bottom: 10px;
+  margin-top: 0px;
+  margin-bottom: 3px;
 }
 
 h4,
@@ -788,7 +788,7 @@ pre code {
 .row {
   margin-right: -15px;
   margin-left: -15px;
-}
+ }
 
 .row:before,
 .row:after {
@@ -862,7 +862,9 @@ pre code {
   min-height: 1px;
   padding-right: 15px;
   padding-left: 15px;
-}
+    top: 0px;
+    left: 0px;
+   }
 
 .col-xs-1,
 .col-xs-2,
@@ -1410,6 +1412,7 @@ table {
   max-width: 100%;
   background-color: transparent;
     margin-top: 0px;
+    margin-right: 0px;
 }
 
 th {
@@ -2382,13 +2385,18 @@ input[type="button"].btn-block {
 }
 
 .collapse {
-  display: none;
-}
+  display: normal;
+  float:left;
+  }
 
 .collapse.in {
   display: block;
 }
 
+.collapse_login {
+  display: normal;
+  float:right;
+  }
 .collapsing {
   position: relative;
   height: 0;
@@ -4509,7 +4517,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .navbar-inverse .navbar-brand {
-  color: #999999;
+  color: #FFFFFF;
 }
 
 .navbar-inverse .navbar-brand:hover,
